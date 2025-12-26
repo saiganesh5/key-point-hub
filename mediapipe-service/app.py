@@ -1,67 +1,3 @@
-# # app.py
-# from fastapi import FastAPI, File, UploadFile, HTTPException
-# from fastapi.responses import JSONResponse
-# import uvicorn
-# import numpy as np
-# from PIL import Image
-# import io
-# import mediapipe as mp
-# import traceback
-# import logging
-#
-# logger = logging.getLogger("mediapipe_debug")
-# logging.basicConfig(level=logging.INFO)
-#
-# app = FastAPI(title="MediaPipe Pose Service")
-#
-# mp_pose = mp.solutions.pose
-# mp_drawing = mp.solutions.drawing_utils
-#
-# def read_makefile(file) -> np.ndarray:
-#     image = Image.open(io.BytesIO(file)).convert("RGB")
-#     return np.array(image)
-#
-#
-# @app.post("/extract-pose")
-# async def extract_pose(file: UploadFile = File(...)):
-#     if not file.content_type.startswith("image/"):
-#         raise HTTPException(status_code=400, detail="File must be an image")
-#
-#     contents = await file.read()
-#     image_np = read_makefile(contents)
-#
-#     with mp_pose.Pose(static_image_mode=True, model_complexity=2) as pose:
-#         results = pose.process(image_np)
-#
-#         if not results.pose_landmarks:
-#             return JSONResponse({"keypoints": [], "num_keypoints": 0})
-#
-#         keypoints = []
-#         for idx, lm in enumerate(results.pose_landmarks.landmark):
-#             keypoints.append({
-#                 "index": idx,
-#                 "x": lm.x,
-#                 "y": lm.y,
-#                 "z": lm.z,
-#                 "visibility": lm.visibility
-#             })
-#
-#         return JSONResponse({
-#             "keypoints": keypoints,
-#             "num_keypoints": len(keypoints)
-#         })
-#
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
-
-
-
-
-
-
-
 # app.py
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
@@ -155,6 +91,7 @@ if __name__ == "__main__":
     # For local dev, prefer using the CLI:
     # python -m uvicorn app:app --reload
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
 
 
 
