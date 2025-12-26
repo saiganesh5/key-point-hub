@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+mediapipe>=0.8.10
+opencv-python-headless
+pillow
+numpy

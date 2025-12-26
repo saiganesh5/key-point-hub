@@ -1,0 +1,50 @@
+services:
+  mediapipe:
+    build: .
+    container_name: mediapipe
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: pose_db
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  # placeholder for Spring Boot app
+  springboot:
+    image: eclipse-temurin:21-jre
+    container_name: springboot
+    working_dir: /app
+    volumes:
+      - ./target/key-point-hub-0.0.1-SNAPSHOT.jar:/app/app.jar
+    # In development, you will mount your build artifact (jar). For now it's a placeholder.
+    command: ["java","-jar","/app/app.jar"]
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mediapipe
+      - mysql
+      - mongo
+
+volumes:
+  mysql-data:
+  mongo-data:
