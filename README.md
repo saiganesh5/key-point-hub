@@ -85,7 +85,7 @@ Environment variables override properties automatically (Spring Boot convention)
 - `SPRING_DATASOURCE_PASSWORD`
 - `SPRING_DATA_MONGODB_URI`
 - `MEDIAPIPE_SERVICE_URL`
-- `APP_CORS_ALLOWED_ORIGINS`
+- `APP_CORS_ALLOWED-ORIGINS`
 
 Never commit real secrets to version control. Use environment variables or externalized config.
 
@@ -188,6 +188,3 @@ Configured to allow `http://localhost:3000` and methods `GET, POST, PUT, DELETE`
 - MySQL/Mongo connection issues → check connection strings and credentials; confirm containers/servers are reachable from the app/container.
 - Large uploads blocked → adjust `spring.servlet.multipart.max-file-size` and `spring.servlet.multipart.max-request-size`.
 - Image not found for a pose → ensure GridFS contains the file ID referenced by the `Pose`.
-
-## License
-Add your chosen license here.
